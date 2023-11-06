@@ -1,6 +1,23 @@
 import socket
 import struct
 import json
+import subprocess
+
+
+def add_ovs_flow(port, action):
+    # Define the OVS flow rule based on the received JSON data
+    flow_rule = f"priority=100,in_port={port},actions={action}"
+
+    # Use the ovs-vsctl command to add the flow
+    cmd = ["ovs-vsctl", "add-flow", "br0", flow_rule]
+
+    try:
+        # Execute the ovs-vsctl command
+        subprocess.run(cmd, check=True)
+        print(f"Added OVS flow for port {port} with action: {action}")
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to add OVS flow: {e}")
+
 
 def extract_json_from_payload(payload_data):
     try:
