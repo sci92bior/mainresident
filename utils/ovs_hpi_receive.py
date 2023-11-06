@@ -2,6 +2,21 @@ import socket
 import struct
 import json
 
+def extract_json_from_payload(payload_data):
+    try:
+        # The JSON-like string starts with "{"
+        start_index = payload_data.rfind(b'{')
+        if start_index == -1:
+            raise ValueError("No JSON-like string found in the payload.")
+
+        # Extract the JSON-like string from the payload
+        json_string = payload_data[start_index:]
+        json_data = json.loads(json_string.decode('utf-8'))
+
+        return json_data
+
+    except (ValueError, UnicodeDecodeError, json.JSONDecodeError):
+        return None
 
 def receive_icmp_packet():
     icmp = socket.getprotobyname("icmp")
@@ -15,7 +30,7 @@ def receive_icmp_packet():
 
         try:
             # Parse the JSON payload
-            json_data = json.loads(payload_data.decode('utf-8'))
+            json_data = extract_json_from_payload(payload_data)
 
             data = json_data.get("data")
             additional_data = json_data.get("additional_data")
