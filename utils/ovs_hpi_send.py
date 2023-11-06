@@ -25,4 +25,4 @@ def send_icmp_packet(target_host, data, additional_data):
     sock.close()
 
 if __name__ == '__main__':
-    send_icmp_packet("192.168.100.62", "Hello World!", "This is additional data")
+    send_icmp_packet("192.168.100.163", "Hello World!", "This is additional data")
