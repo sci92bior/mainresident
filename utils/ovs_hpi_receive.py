@@ -11,10 +11,11 @@ def receive_icmp_packet():
         packet_data, addr = sock.recvfrom(1024)
         icmp_type, icmp_code, icmp_checksum, icmp_id, icmp_seq = struct.unpack('!BBHHH', packet_data[:8])
         payload_data = packet_data[8:]
+        data = payload_data.decode('utf-8')
 
         try:
             # Parse the JSON payload
-            json_data = json.loads(payload_data.decode('utf-8'))
+            json_data = json.loads(data)
 
             data = json_data.get("data")
             additional_data = json_data.get("additional_data")
