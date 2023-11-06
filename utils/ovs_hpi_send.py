@@ -23,4 +23,6 @@ def send_icmp_packet(target_host, data):
     sock.close()
 
 if __name__ == '__main__':
-    send_icmp_packet('192.168.4.244',"Hello World!")
+    data_to_send = '%{"port" :"5",' \
+                   '"src_ip" :"111"}'
+    send_icmp_packet('192.168.4.244',data_to_send)
