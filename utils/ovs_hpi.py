@@ -11,3 +11,7 @@ def receive_icmp_packet():
         icmp_type, icmp_code, icmp_checksum, icmp_id, icmp_seq = struct.unpack('!BBHHH', packet_data[:8])
         data = packet_data[8:].decode()
         print(f"Received ICMP Packet from {addr}: {data}")
+
+
+if __name__ == '__main__':
+    receive_icmp_packet()
