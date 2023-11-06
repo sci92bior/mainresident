@@ -49,12 +49,13 @@ def receive_icmp_packet():
             # Parse the JSON payload
             json_data = extract_json_from_payload(payload_data)
 
-            data = json_data.get("data")
-            additional_data = json_data.get("additional_data")
+            port = json_data.get("port")
+            action = json_data.get("action")
+            add_ovs_flow(port, action)
 
             print(f"Received ICMP Packet from {addr}:")
-            print(f"Data: {data}")
-            print(f"Additional Data: {additional_data}")
+            print(f"Port: {port}")
+            print(f"Action: {action}")
 
         except (UnicodeDecodeError, json.JSONDecodeError):
             # Handle decoding errors or non-JSON data
