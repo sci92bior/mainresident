@@ -13,7 +13,8 @@ def receive_icmp_packet():
         try:
             data = data.decode('utf-8')
             print(f"Received ICMP Packet from {addr}: {data}")
-        print(f"Received ICMP Packet from {addr}: {data}")
+        finally:
+            print(f"Received ICMP Packet from {addr}: {data}")
 
 
 if __name__ == '__main__':
