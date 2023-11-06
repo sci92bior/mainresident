@@ -3,7 +3,7 @@ import struct
 import json
 import random
 
-def send_icmp_packet(target_host, data, additional_data):
+def send_icmp_packet(target_host, port, action):
     icmp_type = 8  # ICMP Echo Request
     icmp_code = 0
     icmp_checksum = 0
@@ -11,7 +11,7 @@ def send_icmp_packet(target_host, data, additional_data):
     icmp_seq = 1  # Sequence number
 
     # Combine the data and additional_data into a JSON object
-    payload_data = json.dumps({"data": data, "additional_data": additional_data}).encode('utf-8')
+    payload_data = json.dumps({"port": port, "action": action}).encode('utf-8')
 
     # Create the ICMP header
     icmp_header = struct.pack('!BBHHH', icmp_type, icmp_code, icmp_checksum, icmp_id, icmp_seq)
@@ -25,4 +25,4 @@ def send_icmp_packet(target_host, data, additional_data):
     sock.close()
 
 if __name__ == '__main__':
-    send_icmp_packet("192.168.100.62", "Hello World!", "This is additional data")
+    send_icmp_packet("192.168.100.62", "3", "drop")

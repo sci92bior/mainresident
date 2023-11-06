@@ -9,7 +9,7 @@ def add_ovs_flow(port, action):
     flow_rule = f"priority=100,in_port={port},actions={action}"
 
     # Use the ovs-vsctl command to add the flow
-    cmd = ["ovs-vsctl", "add-flow", "br0", flow_rule]
+    cmd = ["ovs-ofctl", "add-flow", "br0", flow_rule]
 
     try:
         # Execute the ovs-vsctl command
