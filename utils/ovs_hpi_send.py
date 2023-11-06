@@ -1,21 +1,23 @@
-import random
 import socket
 import struct
+import json
+import random
 
-
-def send_icmp_packet(target_host, data):
+def send_icmp_packet(target_host, data, additional_data):
     icmp_type = 8  # ICMP Echo Request
     icmp_code = 0
     icmp_checksum = 0
     icmp_id = random.randint(0, 0xFFFF)
     icmp_seq = 1  # Sequence number
-    payload = data.encode()
+
+    # Combine the data and additional_data into a JSON object
+    payload_data = json.dumps({"data": data, "additional_data": additional_data}).encode('utf-8')
 
     # Create the ICMP header
     icmp_header = struct.pack('!BBHHH', icmp_type, icmp_code, icmp_checksum, icmp_id, icmp_seq)
 
     # Combine the ICMP header and payload
-    packet = icmp_header + payload
+    packet = icmp_header + payload_data
 
     # Create a raw socket and send the packet
     sock = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_ICMP)
@@ -23,6 +25,4 @@ def send_icmp_packet(target_host, data):
     sock.close()
 
 if __name__ == '__main__':
-    data_to_send = '%{"port" :"5",' \
-                   '"src_ip" :"111"}'
-    send_icmp_packet('192.168.4.244',data_to_send)
+    send_icmp_packet("192.168.100.62", "Hello World!", "This is additional data")
