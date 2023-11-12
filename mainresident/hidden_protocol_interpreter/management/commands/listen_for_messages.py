@@ -8,4 +8,4 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         self.stdout.write('Listening for hidden messages...')
-        receive_icmp_packet()
+        #receive_icmp_packet()

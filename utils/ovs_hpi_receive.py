@@ -4,17 +4,20 @@ import json
 import subprocess
 
 
-def add_ovs_flow(port, action):
+def add_ovs_flow(ip, action):
     # Define the OVS flow rule based on the received JSON data
-    flow_rule = f"priority=100,in_port={port},actions={action}"
+    if action == "drop":
+        flow_rule = f"priority=100,ipv4_src={ip},actions=[]"
+    else:
+        flow_rule = f"priority=100,ipv4_src={ip},actions={action}"
 
     # Use the ovs-vsctl command to add the flow
-    cmd = ["ovs-ofctl", "add-flow", "ovs1", flow_rule]
+    cmd = ["ovs-ofctl", "add-flow", "br1", flow_rule]
 
     try:
         # Execute the ovs-vsctl command
         subprocess.run(cmd, check=True)
-        print(f"Added OVS flow for port {port} with action: {action}")
+        print(f"Added OVS flow for ip {ip} with action: {action}")
     except subprocess.CalledProcessError as e:
         print(f"Failed to add OVS flow: {e}")
 
@@ -49,17 +52,14 @@ def receive_icmp_packet():
             # Parse the JSON payload
             json_data = extract_json_from_payload(payload_data)
 
-            port = json_data.get("port")
+            ip = json_data.get("ip")
             action = json_data.get("action")
-            add_ovs_flow(port, action)
+            add_ovs_flow(ip, action)
 
             print(f"Received ICMP Packet from {addr}:")
-            print(f"Port: {port}")
+            print(f"IP: {ip}")
             print(f"Action: {action}")
 
         except (UnicodeDecodeError, json.JSONDecodeError):
             # Handle decoding errors or non-JSON data
             print(f"Received ICMP Packet from {addr}: Invalid data")
-
-if __name__ == '__main__':
-    receive_icmp_packet()

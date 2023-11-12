@@ -13,9 +13,14 @@ class DeviceType (models.TextChoices):
     CLOUD = "cloud"
     OTHER = "other"
 
+
 class AuthenticatedDevice(models.Model):
     device_type = models.CharField(max_length=50, choices=DeviceType.choices, default=DeviceType.OTHER)
+    device_id = models.CharField(max_length=50, unique=True)
     device_secret = models.CharField(max_length=50, unique=True)
     device_ip = models.CharField(max_length=50, unique=True)
     device_port = models.IntegerField()
+
+    def __str__(self):
+        return self.device_id + " " + self.device_ip + ":" + str(self.device_port)
 

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'mainresident.decision_module',
     'mainresident.command_pusher',
     'mainresident.hidden_protocol_interpreter',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +129,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+RUN_SERVER_PORT = 10000
