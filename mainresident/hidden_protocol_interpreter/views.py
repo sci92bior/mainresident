@@ -20,4 +20,4 @@ def add_alert(request):
             print(request.data)
             print(serializer.errors)
     else:
-        return Response("Invalid request method")
+        return Response("Invalid request method", status=status.HTTP_400_BAD_REQUEST)
