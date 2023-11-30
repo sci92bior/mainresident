@@ -1,14 +1,17 @@
 from django.db import models
 
+
 class ActionTypes(models.TextChoices):
     ALLOW = "allow"
     DROP = "drop"
+
 
 class FieldTypes(models.TextChoices):
     device_id = "device_id"
     port = "port"
     src_ip = "src_ip"
     dst_ip = "dst_ip"
+
 
 class CRCondition(models.Model):
     field_name = models.CharField(max_length=50, choices=FieldTypes.choices)

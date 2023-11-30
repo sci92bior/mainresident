@@ -63,3 +63,6 @@ def receive_icmp_packet():
         except (UnicodeDecodeError, json.JSONDecodeError):
             # Handle decoding errors or non-JSON data
             print(f"Received ICMP Packet from {addr}: Invalid data")
+
+if __name__ == '__main__':
+    receive_icmp_packet()

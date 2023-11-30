@@ -1,10 +1,6 @@
 import json
 
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-
-from mainresident.command_pusher.serializers import HDLCommandSerializer
-from mainresident.decision_module.models import ChallengeResponseEntity, Alert
+from mainresident.decision_module.models import ChallengeResponseEntity
 from mainresident.device_manager.models import AuthenticatedDevice
 from mainresident.hidden_protocol_interpreter.service import send_icmp_packet
 
