@@ -5,9 +5,9 @@ from mainresident.decision_module.models import Alert, ChallengeResponseEntity, 
 
 @admin.register(Alert)
 class AlertAdmin(admin.ModelAdmin):
-    readonly_fields = ('alert_type', 'device_id', 'port', 'src_ip', 'dst_ip', 'alert_time')
-    list_display = ('alert_type', 'device_id', 'port', 'src_ip', 'dst_ip', 'alert_time')
-    list_filter = ('alert_type', 'device_id', 'port', 'src_ip', 'dst_ip', 'alert_time')
+    readonly_fields = ('alert_type', 'device_ip', 'port', 'src_ip', 'dst_ip', 'alert_time')
+    list_display = ('alert_type', 'device_ip', 'port', 'src_ip', 'dst_ip', 'alert_time')
+    list_filter = ('alert_type', 'device_ip', 'port', 'src_ip', 'dst_ip', 'alert_time')
 
 
 @admin.register(ChallengeResponseEntity)

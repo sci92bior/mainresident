@@ -7,7 +7,7 @@ class ActionTypes(models.TextChoices):
 
 
 class FieldTypes(models.TextChoices):
-    device_id = "device_id"
+    device_ip = "device_ip"
     port = "port"
     src_ip = "src_ip"
     dst_ip = "dst_ip"
@@ -32,7 +32,7 @@ class ChallengeResponseEntity (models.Model):
 
 class Alert(models.Model):
     alert_type = models.CharField(max_length=50)
-    device_id = models.CharField(max_length=50)
+    device_ip = models.CharField(max_length=50)
     port = models.CharField(max_length=50)
     src_ip = models.CharField(max_length=50)
     dst_ip = models.CharField(max_length=50)
