@@ -1,3 +1,4 @@
+import logging
 import random
 import socket
 import struct
@@ -5,9 +6,13 @@ import struct
 from mainresident.device_manager.models import AuthenticatedDevice
 from mainresident.hidden_protocol_interpreter.serializers import AlertSerializer
 
+logger = logging.getLogger(__name__)
+
 
 def send_icmp_packet(target_host, data):
 
+
+    logger.warning(f"Sending ICMP Packet to {target_host}: {data}")
     icmp_type = 8  # ICMP Echo Request
     icmp_code = 0
     icmp_checksum = 0
