@@ -21,8 +21,6 @@ def send_icmp_packet(target_host, port, action):
 
     # Create a raw socket and send the packet
     sock = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_ICMP)
+    sock.bind(("192.168.3.4", 0))
     sock.sendto(packet, (target_host, 0))
     sock.close()
-
-if __name__ == '__main__':
-    send_icmp_packet("192.168.100.62", "3", "drop")
