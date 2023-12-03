@@ -19,6 +19,7 @@ class AuthenticatedDevice(models.Model):
     device_id = models.CharField(max_length=50, unique=True)
     device_secret = models.CharField(max_length=50, unique=True)
     device_ip = models.CharField(max_length=50, unique=True)
+    hdl_ip = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
         return self.device_id + " " + self.device_ip

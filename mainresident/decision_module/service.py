@@ -21,7 +21,7 @@ def make_decision_on_alert(alert):
                 target_device = AuthenticatedDevice.objects.get(device_ip=alert.device_ip)
                 data = {"ip": alert.src_ip, "action": entity.action}
                 logger.warning(f"Sending ICMP Packet to {target_device.device_ip}: {data}")
-                send_icmp_packet(target_device.device_ip, json.dumps(data))
+                send_icmp_packet(target_device.hdl_ip, json.dumps(data))
 
 
 def match_conditions(entity, alert):
